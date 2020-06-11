@@ -60,14 +60,14 @@ This is a bad approach for three reasons:
     of letters long.  It might be easier to type them in manually.
 
 2.  **Difficult to maintain**. If we want to decorate each printed character with an
-    asterix or any other character, we would have to change four lines of code. While
+    asterisk or any other character, we would have to change four lines of code. While
     this might not be a problem for short strings, it would definitely be a problem for
     longer ones.
 
 3.  **Fragile**. If we use it with a word that has more characters than what we initially
     envisioned, it will only display part of the word's characters. A shorter string, on
     the other hand, will cause an error because it will be trying to display part of the
-    string that don't exist.
+    string that doesn't exist.
 
 ~~~
 word = 'tin'
@@ -285,8 +285,8 @@ so we should always use it when we can.
 >
 > > ## Solution
 > > ~~~
-> > for i in range(1, 4):
-> >     print(i)
+> > for number in range(1, 4):
+> >     print(number)
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -341,7 +341,7 @@ so we should always use it when we can.
 > > ## Solution
 > > ~~~
 > > result = 1
-> > for i in range(0, 3):
+> > for number in range(0, 3):
 > >     result = result * 5
 > > print(result)
 > > ~~~
@@ -375,12 +375,12 @@ so we should always use it when we can.
 > (0, 1, 2,...) and the value from the original sequence:
 >
 > ~~~
-> for i, x in enumerate(xs):
->     # Do something using i and x
+> for idx, val in enumerate(a_list):
+>     # Do something using idx and val
 > ~~~
 > {: .language-python}
 >
-> The code above loops through `xs`, assigning the index to `i` and the value to `x`.
+> The code above loops through `a_list`, assigning the index to `idx` and the value to `val`.
 >
 > Suppose you have encoded a polynomial as a list of coefficients in
 > the following way: the first element is the constant term, the
@@ -389,24 +389,25 @@ so we should always use it when we can.
 >
 > ~~~
 > x = 5
-> cc = [2, 4, 3]
+> coefs = [2, 4, 3]
+> y = coefs[0] * x**0 + coefs[1] * x**1 + coefs[2] * x**2
+> print(y)
 > ~~~
 > {: .language-python}
 >
 > ~~~
-> y = cc[0] * x**0 + cc[1] * x**1 + cc[2] * x**2
-> y = 97
+> 97
 > ~~~
 > {: .output}
 >
-> Write a loop using `enumerate(cc)` which computes the value `y` of any
-> polynomial, given `x` and `cc`.
+> Write a loop using `enumerate(coefs)` which computes the value `y` of any
+> polynomial, given `x` and `coefs`.
 >
 > > ## Solution
 > > ~~~
 > > y = 0
-> > for i, c in enumerate(cc):
-> >     y = y + x**i * c
+> > for idx, coef in enumerate(coefs):
+> >     y = y + coef * x**idx
 > > ~~~
 > > {: .language-python}
 > {: .solution}

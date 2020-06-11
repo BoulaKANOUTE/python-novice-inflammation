@@ -13,7 +13,6 @@ keypoints:
 - "The list `sys.argv` contains the command-line arguments that a program was run with."
 - "Avoid silent failures."
 - "The pseudo-file `sys.stdin` connects to a program's standard input."
-- "The pseudo-file `sys.stdout` connects to a program's standard output."
 ---
 
 The Jupyter Notebook and other interactive tools are great for prototyping code and exploring data,
@@ -163,12 +162,13 @@ $ cat ../code/readings_01.py
 import sys
 import numpy
 
+
 def main():
     script = sys.argv[0]
     filename = sys.argv[1]
     data = numpy.loadtxt(filename, delimiter=',')
-    for m in numpy.mean(data, axis=1):
-        print(m)
+    for row_mean in numpy.mean(data, axis=1):
+        print(row_mean)
 ~~~
 {: .language-python}
 
@@ -199,8 +199,8 @@ def main():
     script = sys.argv[0]
     filename = sys.argv[1]
     data = numpy.loadtxt(filename, delimiter=',')
-    for m in numpy.mean(data, axis=1):
-        print(m)
+    for row_mean in numpy.mean(data, axis=1):
+        print(row_mean)
 
 if __name__ == '__main__':
    main()
@@ -399,8 +399,8 @@ def main():
     script = sys.argv[0]
     for filename in sys.argv[1:]:
         data = numpy.loadtxt(filename, delimiter=',')
-        for m in numpy.mean(data, axis=1):
-            print(m)
+        for row_mean in numpy.mean(data, axis=1):
+            print(row_mean)
 
 if __name__ == '__main__':
    main()
@@ -456,8 +456,8 @@ def main():
     action = sys.argv[1]
     filenames = sys.argv[2:]
 
-    for f in filenames:
-        data = numpy.loadtxt(f, delimiter=',')
+    for filename in filenames:
+        data = numpy.loadtxt(filename, delimiter=',')
 
         if action == '--min':
             values = numpy.min(data, axis=1)
@@ -466,8 +466,8 @@ def main():
         elif action == '--max':
             values = numpy.max(data, axis=1)
 
-        for m in values:
-            print(m)
+        for val in values:
+            print(val)
 
 if __name__ == '__main__':
    main()
@@ -520,8 +520,8 @@ def main():
     filenames = sys.argv[2:]
     assert action in ['--min', '--mean', '--max'], \
            'Action is not one of --min, --mean, or --max: ' + action
-    for f in filenames:
-        process(f, action)
+    for filename in filenames:
+        process(filename, action)
 
 def process(filename, action):
     data = numpy.loadtxt(filename, delimiter=',')
@@ -533,8 +533,8 @@ def process(filename, action):
     elif action == '--max':
         values = numpy.max(data, axis=1)
 
-    for m in values:
-        print(m)
+    for val in values:
+        print(val)
 
 if __name__ == '__main__':
    main()
@@ -625,8 +625,8 @@ def main():
     if len(filenames) == 0:
         process(sys.stdin, action)
     else:
-        for f in filenames:
-            process(f, action)
+        for filename in filenames:
+            process(filename, action)
 
 def process(filename, action):
     data = numpy.loadtxt(filename, delimiter=',')
@@ -638,8 +638,8 @@ def process(filename, action):
     elif action == '--max':
         values = numpy.max(data, axis=1)
 
-    for m in values:
-        print(m)
+    for val in values:
+        print(val)
 
 if __name__ == '__main__':
    main()
@@ -773,6 +773,7 @@ the program now does everything we set out to do.
 >
 > > ## Solution
 > > ~~~
+> > # this is code/readings_07.py
 > > import sys
 > > import numpy
 > >
@@ -785,8 +786,8 @@ the program now does everything we set out to do.
 > >     if len(filenames) == 0:
 > >         process(sys.stdin, action)
 > >     else:
-> >         for f in filenames:
-> >             process(f, action)
+> >         for filename in filenames:
+> >             process(filename, action)
 > >
 > > def process(filename, action):
 > >     data = numpy.loadtxt(filename, delimiter=',')
@@ -798,8 +799,8 @@ the program now does everything we set out to do.
 > >     elif action == '-x':
 > >         values = numpy.max(data, axis=1)
 > >
-> >     for m in values:
-> >         print(m)
+> >     for val in values:
+> >         print(val)
 > >
 > > main()
 > > ~~~
@@ -836,8 +837,8 @@ the program now does everything we set out to do.
 > >     if len(filenames) == 0:
 > >         process(sys.stdin, action)
 > >     else:
-> >         for f in filenames:
-> >             process(f, action)
+> >         for filename in filenames:
+> >             process(filename, action)
 > >
 > > def process(filename, action):
 > >     data = numpy.loadtxt(filename, delimiter=',')
@@ -849,8 +850,8 @@ the program now does everything we set out to do.
 > >     elif action == '--max':
 > >         values = numpy.max(data, axis=1)
 > >
-> >     for m in values:
-> >         print(m)
+> >     for val in values:
+> >         print(val)
 > >
 > > main()
 > > ~~~
@@ -866,6 +867,7 @@ the program now does everything we set out to do.
 >
 > > ## Solution
 > > ~~~
+> > # this is code/readings_09.py
 > > import sys
 > > import numpy
 > >
@@ -881,8 +883,8 @@ the program now does everything we set out to do.
 > >     if len(filenames) == 0:
 > >         process(sys.stdin, action)
 > >     else:
-> >         for f in filenames:
-> >             process(f, action)
+> >         for filename in filenames:
+> >             process(filename, action)
 > >
 > > def process(filename, action):
 > >     data = numpy.loadtxt(filename, delimiter=',')
@@ -894,8 +896,8 @@ the program now does everything we set out to do.
 > >     elif action == '--max':
 > >         values = numpy.max(data, axis=1)
 > >
-> >     for m in values:
-> >         print(m)
+> >     for val in values:
+> >         print(val)
 > >
 > > main()
 > > ~~~
@@ -923,12 +925,12 @@ the program now does everything we set out to do.
 > >     else:
 > >         nrow0, ncol0 = row_col_count(filenames[0])
 > >         print('First file %s: %d rows and %d columns' % (filenames[0], nrow0, ncol0))
-> >         for f in filenames[1:]:
-> >             nrow, ncol = row_col_count(f)
+> >         for filename in filenames[1:]:
+> >             nrow, ncol = row_col_count(filename)
 > >             if nrow != nrow0 or ncol != ncol0:
-> >                 print('File %s does not check: %d rows and %d columns' % (f, nrow, ncol))
+> >                 print('File %s does not check: %d rows and %d columns' % (filename, nrow, ncol))
 > >             else:
-> >                 print('File %s checks' % f)
+> >                 print('File %s checks' % filename)
 > >         return
 > >
 > > def row_col_count(filename):
@@ -969,10 +971,10 @@ the program now does everything we set out to do.
 > >         sum_nlines = count_file_like(sys.stdin)
 > >         print('stdin: %d' % sum_nlines)
 > >     else:
-> >         for f in filenames:
-> >             n = count_file(f)
-> >             print('%s %d' % (f, n))
-> >             sum_nlines += n
+> >         for filename in filenames:
+> >             nlines = count_file(filename)
+> >             print('%s %d' % (filename, nlines))
+> >             sum_nlines += nlines
 > >         print('total: %d' % sum_nlines)
 > >
 > > def count_file(filename):

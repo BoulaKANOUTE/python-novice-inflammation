@@ -70,9 +70,9 @@ this piece of code halts as soon as the loop encounters a value that isn't posit
 ~~~
 numbers = [1.5, 2.3, 0.7, -0.001, 4.4]
 total = 0.0
-for n in numbers:
-    assert n > 0.0, 'Data should only contain positive values'
-    total += n
+for num in numbers:
+    assert num > 0.0, 'Data should only contain positive values'
+    total += num
 print('total is:', total)
 ~~~
 {: .language-python}
@@ -82,9 +82,9 @@ print('total is:', total)
 AssertionError                            Traceback (most recent call last)
 <ipython-input-19-33d87ea29ae4> in <module>()
       2 total = 0.0
-      3 for n in numbers:
-----> 4     assert n > 0.0, 'Data should only contain positive values'
-      5     total += n
+      3 for num in numbers:
+----> 4     assert num > 0.0, 'Data should only contain positive values'
+      5     total += num
       6 print('total is:', total)
 
 AssertionError: Data should only contain positive values
@@ -143,7 +143,7 @@ def normalize_rectangle(rect):
 ~~~
 {: .language-python}
 
-The preconditions on lines 3, 5, and 6 catch invalid inputs:
+The preconditions on lines 6, 8, and 9 catch invalid inputs:
 
 ~~~
 print(normalize_rectangle( (0.0, 1.0, 2.0) )) # missing the fourth coordinate
@@ -153,10 +153,10 @@ print(normalize_rectangle( (0.0, 1.0, 2.0) )) # missing the fourth coordinate
 ~~~
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
-<ipython-input-21-3a97b1dcab70> in <module>()
+<ipython-input-2-1b9cd8e18a1f> in <module>
 ----> 1 print(normalize_rectangle( (0.0, 1.0, 2.0) )) # missing the fourth coordinate
 
-<ipython-input-20-408dc39f3915> in normalize_rectangle(rect)
+<ipython-input-1-c94cf5b065b9> in normalize_rectangle(rect)
       4     (x0, y0) and (x1, y1) define the lower left and upper right corners
       5     of the rectangle, respectively.'''
 ----> 6     assert len(rect) == 4, 'Rectangles must contain 4 coordinates'
@@ -175,21 +175,21 @@ print(normalize_rectangle( (4.0, 2.0, 1.0, 5.0) )) # X axis inverted
 ~~~
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
-<ipython-input-22-f05ae7878a45> in <module>()
+<ipython-input-3-325036405532> in <module>
 ----> 1 print(normalize_rectangle( (4.0, 2.0, 1.0, 5.0) )) # X axis inverted
 
-<ipython-input-20-408dc39f3915> in normalize_rectangle(rect)
-      3     assert len(rect) == 4, 'Rectangles must contain 4 coordinates'
-      4     x0, y0, x1, y1 = rect
-----> 5     assert x0 < x1, 'Invalid X coordinates'
-      6     assert y0 < y1, 'Invalid Y coordinates'
-      7
+<ipython-input-1-c94cf5b065b9> in normalize_rectangle(rect)
+      6     assert len(rect) == 4, 'Rectangles must contain 4 coordinates'
+      7     x0, y0, x1, y1 = rect
+----> 8     assert x0 < x1, 'Invalid X coordinates'
+      9     assert y0 < y1, 'Invalid Y coordinates'
+     10
 
 AssertionError: Invalid X coordinates
 ~~~
 {: .error}
 
-The post-conditions on lines 17 and 18 help us catch bugs by telling us when our
+The post-conditions on lines 20 and 21 help us catch bugs by telling us when our
 calculations might have been incorrect.
 For example,
 if we normalize a rectangle that is taller than it is wide everything seems OK:
@@ -215,15 +215,15 @@ print(normalize_rectangle( (0.0, 0.0, 5.0, 1.0) ))
 ~~~
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
-<ipython-input-24-5f0ef7954aeb> in <module>()
+<ipython-input-5-8d4a48f1d068> in <module>
 ----> 1 print(normalize_rectangle( (0.0, 0.0, 5.0, 1.0) ))
 
-<ipython-input-20-408dc39f3915> in normalize_rectangle(rect)
-     16
-     17     assert 0 < upper_x <= 1.0, 'Calculated upper X coordinate invalid'
----> 18     assert 0 < upper_y <= 1.0, 'Calculated upper Y coordinate invalid'
+<ipython-input-1-c94cf5b065b9> in normalize_rectangle(rect)
      19
-     20     return (0, 0, upper_x, upper_y)
+     20     assert 0 < upper_x <= 1.0, 'Calculated upper X coordinate invalid'
+---> 21     assert 0 < upper_y <= 1.0, 'Calculated upper Y coordinate invalid'
+     22
+     23     return (0, 0, upper_x, upper_y)
 
 AssertionError: Calculated upper Y coordinate invalid
 ~~~

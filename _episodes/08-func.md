@@ -54,7 +54,7 @@ def fahr_to_celsius(temp):
 ~~~
 {: .language-python}
 
-![The Blueprint for a Python Function](../fig/python-function.svg)
+![Labeled parts of a Python function definition](../fig/python-function.svg)
 
 
 The function definition opens with the keyword `def` followed by the
@@ -202,10 +202,10 @@ We can reproduce the previous analysis with a much simpler `for` loop:
 ~~~
 filenames = sorted(glob.glob('inflammation*.csv'))
 
-for f in filenames[:3]:
-    print(f)
-    visualize(f)
-    detect_problems(f)
+for filename in filenames[:3]:
+    print(filename)
+    visualize(filename)
+    detect_problems(filename)
 ~~~
 {: .language-python}
 
@@ -257,18 +257,18 @@ print(offset_mean(data, 0))
 {: .language-python}
 
 ~~~
-[[-6.14875 -6.14875 -5.14875 ..., -3.14875 -6.14875 -6.14875]
- [-6.14875 -5.14875 -4.14875 ..., -5.14875 -6.14875 -5.14875]
- [-6.14875 -5.14875 -5.14875 ..., -4.14875 -5.14875 -5.14875]
- ...,
- [-6.14875 -5.14875 -5.14875 ..., -5.14875 -5.14875 -5.14875]
- [-6.14875 -6.14875 -6.14875 ..., -6.14875 -4.14875 -6.14875]
- [-6.14875 -6.14875 -5.14875 ..., -5.14875 -5.14875 -6.14875]]
+[[-6.14875 -6.14875 -5.14875 ... -3.14875 -6.14875 -6.14875]
+ [-6.14875 -5.14875 -4.14875 ... -5.14875 -6.14875 -5.14875]
+ [-6.14875 -5.14875 -5.14875 ... -4.14875 -5.14875 -5.14875]
+ ...
+ [-6.14875 -5.14875 -5.14875 ... -5.14875 -5.14875 -5.14875]
+ [-6.14875 -6.14875 -6.14875 ... -6.14875 -4.14875 -6.14875]
+ [-6.14875 -6.14875 -5.14875 ... -5.14875 -5.14875 -6.14875]]
 ~~~
 {: .output}
 
 It's hard to tell from the default output whether the result is correct,
-but there are a few simple tests that will reassure us:
+but there are a few tests that we can run to reassure us:
 
 ~~~
 print('original min, mean, and max are:', numpy.min(data), numpy.mean(data), numpy.max(data))
@@ -374,7 +374,12 @@ we can break the string across multiple lines:
 def offset_mean(data, target_mean_value):
     '''Return a new array containing the original data
        with its mean offset to match the desired value.
-    Example: offset_mean([1, 2, 3], 0) => [-1, 0, 1]'''
+
+    Examples
+    --------
+    >>> offset_mean([1, 2, 3], 0)
+    array([-1.,  0.,  1.])
+    '''
     return (data - numpy.mean(data)) + target_mean_value
 
 help(offset_mean)
@@ -382,11 +387,16 @@ help(offset_mean)
 {: .language-python}
 
 ~~~
-Help on function center in module __main__:
+Help on function offset_mean in module __main__:
 
 offset_mean(data, target_mean_value)
-    Return a new array containing the original data with its mean offset to match the desired value.
-    Example: offset_mean([1, 2, 3], 0) => [-1, 0, 1]
+    Return a new array containing the original data
+       with its mean offset to match the desired value.
+
+    Examples
+    --------
+    >>> offset_mean([1, 2, 3], 0)
+    array([-1.,  0.,  1.])
 ~~~
 {: .output}
 
@@ -443,9 +453,14 @@ let's re-define our `offset_mean` function like this:
 
 ~~~
 def offset_mean(data, target_mean_value=0.0):
-    '''Return a new array containing the original data with its mean offset to match the
-       desired value (0 by default).
-    Example: offset_mean([1, 2, 3], 0) => [-1, 0, 1]'''
+    '''Return a new array containing the original data
+       with its mean offset to match the desired value, (0 by default).
+
+    Examples
+    --------
+    >>> offset_mean([1, 2, 3])
+    array([-1.,  0.,  1.])
+    '''
     return (data - numpy.mean(data)) + target_mean_value
 ~~~
 {: .language-python}

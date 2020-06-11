@@ -48,12 +48,12 @@ done
 The second line of this code uses the keyword `if` to tell Python that we want to make a choice.
 If the test that follows the `if` statement is true,
 the body of the `if`
-(i.e., the set of lines indented underneath it) is executed.
+(i.e., the set of lines indented underneath it) is executed, and "greater" is printed.
 If the test is false,
-the body of the `else` is executed instead.
-Only one or the other is ever executed:
+the body of the `else` is executed instead, and "not greater" is printed.
+Only one or the other is ever executed before continuing on with program execution to print "done":
 
-![Executing a Conditional](../fig/python-flowchart-conditional.png)
+![A flowchart diagram of the if-else construct that tests if variable num is greater than 100](../fig/python-flowchart-conditional.png)
 
 Conditional statements don't have to include an `else`.
 If there isn't one,
@@ -410,7 +410,7 @@ freeing us from having to manually examine every plot for features we've seen be
 > {: .output}
 >Use the following Python code as your starting point:
 > ~~~
-> files = ['inflammation-01.csv',
+> filenames = ['inflammation-01.csv',
 >          'myscript.py',
 >          'inflammation-02.csv',
 >          'small-01.csv',
@@ -424,7 +424,7 @@ freeing us from having to manually examine every plot for features we've seen be
 > Your solution should:
 >
 > 1.  loop over the names of the files
-> 2.  figure out which group each filename belongs
+> 2.  figure out which group each filename belongs in
 > 3.  append the filename to that list
 >
 > In the end the three lists should be:
@@ -438,13 +438,13 @@ freeing us from having to manually examine every plot for features we've seen be
 >
 > > ## Solution
 > > ~~~
-> > for file in files:
-> >     if file.startswith('inflammation-'):
-> >         large_files.append(file)
-> >     elif file.startswith('small-'):
-> >         small_files.append(file)
+> > for filename in filenames:
+> >     if filename.startswith('inflammation-'):
+> >         large_files.append(filename)
+> >     elif filename.startswith('small-'):
+> >         small_files.append(filename)
 > >     else:
-> >         other_files.append(file)
+> >         other_files.append(filename)
 > >
 > > print('large_files:', large_files)
 > > print('small_files:', small_files)
